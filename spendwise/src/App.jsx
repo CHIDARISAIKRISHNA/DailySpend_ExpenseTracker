@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import ExpenseForm from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
-import SummaryCards from "./components/SummaryCards";
 
 function getToday() {
   const today = new Date();
@@ -112,30 +111,28 @@ export default function App() {
         </button>
       </header>
 
-      <main className="container">
-        <section className="welcome">
-          <h2>Track your spending 💚</h2>
-          <p>Small expenses matter. Keep track of where your money goes.</p>
-        </section>
+     <main className="container">
+  <section className="welcome">
+    <h2>Track your spending 💚</h2>
+    <p>Small expenses matter. Keep track of where your money goes.</p>
+  </section>
 
-        <SummaryCards expenses={dailyExpenses} />
+  <div className="main-grid">
+    <ExpenseForm
+      selectedDate={selectedDate}
+      onDateChange={setSelectedDate}
+      onAdd={saveExpense}
+      editingExpense={editingExpense}
+      onCancelEdit={cancelEdit}
+    />
 
-        <div className="main-grid">
-          <ExpenseForm
-            selectedDate={selectedDate}
-            onDateChange={setSelectedDate}
-            onAdd={saveExpense}
-            editingExpense={editingExpense}
-            onCancelEdit={cancelEdit}
-          />
-
-          <ExpenseList
-  expenses={expenses}
-  onDelete={deleteExpense}
-  onEdit={startEdit}
-/>
-        </div>
-      </main>
+    <ExpenseList
+      expenses={expenses}
+      onDelete={deleteExpense}
+      onEdit={startEdit}
+    />
+  </div>
+</main>
     </div>
   );
 }
